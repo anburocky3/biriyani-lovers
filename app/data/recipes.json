@@ -1,0 +1,214 @@
+{
+  "cooker": {
+    "label": "Cooker",
+    "labelTa": "குக்கர்",
+    "subtitle": "Fast weekday biriyani",
+    "subtitleTa": "வாரநாட்களுக்கு விரைவான பிரியாணி",
+    "waterRatio": 1.1,
+    "waterMethod": "Measured water cooking",
+    "waterMethodTa": "அளவிட்ட தண்ணீர் முறை",
+    "cookMethod": "Pressure cook: 1 whistle + rest",
+    "cookMethodTa": "பிரஷர் குக்கரில் 1 விசில் + ஓய்வு",
+    "steps": [
+      "Marinate {protein} with curd, chili, turmeric, mint, and coriander for 20 minutes.",
+      "Heat oil and ghee, fry whole spices and sliced onions till golden.",
+      "Add tomato and green chili, cook until soft.",
+      "Add marinated {protein} and saute on medium heat until aromatic.",
+      "Add soaked rice and measured water, mix once very gently.",
+      "Close lid and cook on low-medium flame: 1 whistle for veg, 2 whistles for chicken, 4 whistles for mutton. Rest 10 to 12 minutes before opening."
+    ],
+    "stepsTa": [
+      "{protein} மீது தயிர், மிளகாய், மஞ்சள், புதினா, தனியா சேர்த்து 20 நிமிடம் மரினேட் செய்யவும்.",
+      "எண்ணெய் மற்றும் நெய்யை சூடாக்கி, முழு மசாலா மற்றும் வெங்காயத்தை பொன்னிறமாக வறுக்கவும்.",
+      "தக்காளி மற்றும் பச்சை மிளகாய் சேர்த்து மென்மையாகும் வரை வேகவைக்கவும்.",
+      "மரினேட் செய்த {protein} சேர்த்து நடுத்தர தீயில் மணம் வரும் வரை சமைக்கவும்.",
+      "ஊற வைத்த அரிசி மற்றும் அளவிட்ட தண்ணீரை சேர்த்து ஒரு முறை மெதுவாக கலக்கவும்.",
+      "மூடியை மூடி நடுத்தர தீயில் 1 விசில் வரை சமைத்து, 12 நிமிடம் ஓய்வில் விடவும்."
+    ],
+    "chefTips": [
+      "Do not overmix once rice is added.",
+      "Resting after whistle keeps grains separate.",
+      "Use medium flame to avoid bottom burning."
+    ],
+    "stepTips": [
+      "Use fresh curd and keep the marinade short for chicken, longer for mutton.",
+      "Let the onions turn deep golden for a richer cooker biriyani base.",
+      "Cook the tomato until it loses raw smell so the masala stays smooth.",
+      "Saute the meat only until it changes color; the pressure stage will finish it.",
+      "Fold the rice in once so the grains stay whole and do not break.",
+      "Veg needs 1 whistle, chicken 2 whistles, and mutton 4 whistles. Always rest before opening the lid."
+    ],
+    "stepTipsTa": [
+      "புதிய தயிரை பயன்படுத்தி, சிக்கனுக்கு குறுகிய மரினேட் நேரமும், மட்டனுக்கு நீண்ட நேரமும் வைத்திருக்கவும்.",
+      "அதிகச் சுவைக்க வெங்காயம் ஆழமான பொன்னிறமாகும் வரை வதக்கவும்.",
+      "தக்காளியின் பச்சை வாசனை போகும் வரை வேகவைத்து, மசாலாவை மென்மையாக வைத்திருக்கவும்.",
+      "இறைச்சி நிறம் மாறும் வரை மட்டுமே வதக்கவும்; மீதியை பிரஷர் கட்டத்தில் முடியும்.",
+      "அரிசியை ஒருமுறை மட்டும் மெதுவாக கலக்கவும், அரிசி உடையாமல் காக்கவும்.",
+      "சைவத்திற்கு 1 விசில், சிக்கனுக்கு 2 விசில், மட்டனுக்கு 4 விசில். மூடியை திறக்கும் முன் கண்டிப்பாக ஓய்வு கொடுக்கவும்."
+    ],
+    "chefTipsTa": [
+      "அரிசி சேர்ந்த பிறகு அதிகமாக கலக்க வேண்டாம்.",
+      "விசில் பிறகு ஓய்வு கொடுத்தால் அரிசி தனித்தனியாக இருக்கும்.",
+      "அடி பிடிக்காமல் இருக்க நடுத்தர தீயில் சமைக்கவும்."
+    ]
+  },
+  "dabara": {
+    "label": "Dabara Set",
+    "labelTa": "டபாரா செட்",
+    "subtitle": "Traditional layered style",
+    "subtitleTa": "பாரம்பரிய அடுக்குமுறை",
+    "waterRatio": 2,
+    "waterMethod": "Boil and partial cook before dum",
+    "waterMethodTa": "கொதிக்க வைத்து பகுதி வேகவைத்து டம் செய்யும் முறை",
+    "cookMethod": "Boil + dum finish",
+    "cookMethodTa": "கொதிப்பு + டம் முடிப்பு",
+    "steps": [
+      "Marinate {protein} with curd and biriyani masala for 30 minutes.",
+      "Cook masala base with onions, tomato, ginger-garlic, and whole spices.",
+      "Boil rice separately with salt and whole spices to 70 percent doneness.",
+      "Layer masala and rice in dabara set, drizzle saffron milk and ghee.",
+      "Seal and dum on low flame for 20 to 25 minutes.",
+      "Rest 10 minutes, then fluff gently from the sides."
+    ],
+    "stepsTa": [
+      "{protein} மீது தயிர் மற்றும் பிரியாணி மசாலா சேர்த்து 30 நிமிடம் மரினேட் செய்யவும்.",
+      "வெங்காயம், தக்காளி, இஞ்சி-பூண்டு, முழு மசாலாவுடன் மசாலா அடிப்பை சமைக்கவும்.",
+      "அரிசியை தனியாக உப்பு மற்றும் முழு மசாலாவுடன் 70% அளவு வரை வேகவைக்கவும்.",
+      "டபாரா செட்டில் மசாலா மற்றும் அரிசியை அடுக்கி, குங்குமப்பூ பால் மற்றும் நெய் தெளிக்கவும்.",
+      "மூடி குறைந்த தீயில் 20 முதல் 25 நிமிடம் டம் செய்யவும்.",
+      "10 நிமிடம் ஓய்வில் வைத்து, பிறகு ஓரங்களிலிருந்து மெதுவாக கிளறவும்."
+    ],
+    "chefTips": [
+      "Keep dum flame low and steady.",
+      "Seal edges with dough for better aroma.",
+      "Layer mint and fried onions for richer flavor."
+    ],
+    "stepTips": [
+      "Marinate longer for mutton so the spice paste can penetrate the meat.",
+      "Cook the masala slowly until the oil separates; that is the flavor base.",
+      "Boil the rice only until 70 percent done so it can finish during dum.",
+      "Layer rice gently and avoid pressing it down, or the grains will clump.",
+      "Keep the flame as low as possible and let the steam finish the rice.",
+      "Rest before opening so the steam settles and the aroma stays inside."
+    ],
+    "stepTipsTa": [
+      "மட்டனுக்கு மசாலா நன்றாக ஊடுருவ, அதிக நேரம் மரினேட் செய்யவும்.",
+      "மசாலாவை மெதுவாகச் சமைத்து எண்ணெய் பிரியும் வரை விடுங்கள்; அதுவே சுவையின் அடிப்படை.",
+      "அரிசி 70 சதவீதம் வரை மட்டும் வேகவைத்து, மீதியை டமில் முடிக்கவும்.",
+      "அரிசியை மெதுவாக அடுக்கி, அழுத்தி விடாதீர்கள்; இல்லையெனில் கட்டியாகிவிடும்.",
+      "தீயை மிகக் குறைவாக வைத்து, நீராவி மூலம் அரிசியை முடிக்க விடுங்கள்.",
+      "திறக்கும் முன் ஓய்வில் வைத்து, நீராவி அமர்ந்த பிறகே மூடியை திறக்கவும்."
+    ],
+    "chefTipsTa": [
+      "டம் தீயை குறைவாகவும் நிலையாகவும் வைத்திருங்கள்.",
+      "மணம் தக்க வைக்க ஓரங்களை மாவால் சீல் செய்யவும்.",
+      "அதிக சுவைக்க புதினா மற்றும் வெங்காயத்தை அடுக்கவும்."
+    ]
+  },
+  "open_pot": {
+    "label": "Open Pot",
+    "labelTa": "திறந்த பாத்திரம்",
+    "subtitle": "Classic drain method",
+    "subtitleTa": "பாரம்பரிய வடிகட்டு முறை",
+    "waterRatio": null,
+    "waterMethod": "Excess water drain method",
+    "waterMethodTa": "அதிக தண்ணீர் கொதித்து வடிகட்டு முறை",
+    "cookMethod": "Open boil and drain",
+    "cookMethodTa": "திறந்த கொதிப்பு மற்றும் வடிகட்டுதல்",
+    "steps": [
+      "Prepare masala in a thick-bottom pot with oil, onions, tomato, and spices.",
+      "Cook {protein} in masala until 80 percent done.",
+      "Boil rice in excess salted water with whole spices until 70 to 80 percent done.",
+      "Drain rice completely and layer over masala.",
+      "Cover tightly and dum on low flame for 18 to 22 minutes.",
+      "Rest, then fluff with a flat spoon without stirring aggressively."
+    ],
+    "stepsTa": [
+      "தடிப்பான பாத்திரத்தில் எண்ணெய், வெங்காயம், தக்காளி, மசாலாவுடன் மசாலா தயாரிக்கவும்.",
+      "மரினேட் செய்த {protein} ஐ 80% வரை சமைக்கவும்.",
+      "அரிசியை அதிக உப்பு தண்ணீரில் முழு மசாலாவுடன் 70 முதல் 80% வரை வேகவைக்கவும்.",
+      "அரிசியை முழுவதும் வடிகட்டி மசாலாவின் மேல் அடுக்கவும்.",
+      "மூடி குறைந்த தீயில் 18 முதல் 22 நிமிடம் டம் செய்யவும்.",
+      "ஓய்வில் வைத்து, கடுமையாக கலக்காமல் மெதுவாக கிளறவும்."
+    ],
+    "chefTips": [
+      "Use plenty of boiling water for longer grain separation.",
+      "Drain quickly to prevent overcooking.",
+      "Never stir from the center during dum."
+    ],
+    "stepTips": [
+      "Build a strong masala before adding meat so the open-pot aroma develops early.",
+      "Cook the meat until it is nearly done before rice goes in.",
+      "Use plenty of salted water so the rice can move freely while boiling.",
+      "Drain immediately after the rice reaches the right bite to stop carryover cooking.",
+      "Cover tightly so the steam finishes the biriyani without extra water.",
+      "Use a flat spoon only from the edge to keep the layers intact."
+    ],
+    "stepTipsTa": [
+      "இறைச்சியைச் சேர்ப்பதற்கு முன் வலுவான மசாலாவை உருவாக்கி, வாசனை முதலில் வளரவிடவும்.",
+      "அரிசி சேர்ப்பதற்கு முன் இறைச்சியை கிட்டத்தட்ட வேகும் வரை சமைக்கவும்.",
+      "கொதிக்கும் போது அரிசி சுதந்திரமாக நகர அதிக உப்பு நீர் பயன்படுத்தவும்.",
+      "அரிசி சரியான பதத்தில் வந்தவுடன் உடனே வடிகட்டி, அதிகமாக வேகுவதைத் தடுக்கவும்.",
+      "கூடுதல் நீர் இல்லாமல் நீராவி மூலம் பிரியாணி முடிவடைய மூடியை நன்றாக மூடவும்.",
+      "அடுக்குகள் கலைவாமல் இருக்க ஓரத்திலிருந்து மட்டும் தட்டையான கரண்டியைப் பயன்படுத்தவும்."
+    ],
+    "chefTipsTa": [
+      "அரிசி நன்றாக பிரிய அதிக கொதிநீர் பயன்படுத்தவும்.",
+      "அதிக வேகாது இருக்க உடனே வடிகட்டவும்.",
+      "டம் நேரத்தில் நடுவிலிருந்து கலக்க வேண்டாம்."
+    ]
+  },
+  "handi": {
+    "label": "Handi",
+    "labelTa": "ஹாண்டி",
+    "subtitle": "Slow-cooked aromatic biriyani",
+    "subtitleTa": "மெதுவாக சமைக்கும் மணமிகு பிரியாணி",
+    "waterRatio": 1.4,
+    "waterMethod": "Measured water + dum",
+    "waterMethodTa": "அளவிட்ட தண்ணீர் + டம்",
+    "cookMethod": "Slow cook handi dum",
+    "cookMethodTa": "மெதுவான ஹாண்டி டம்",
+    "steps": [
+      "Marinate {protein} and keep aside for 30 minutes.",
+      "Build masala base with ghee, oil, whole spices, onion, and tomato.",
+      "Add marinated {protein} and cook until oil separates.",
+      "Add soaked rice and measured hot water.",
+      "Seal handi and cook low flame for 25 to 30 minutes.",
+      "Rest 10 minutes, break seal, and fluff from edge to center."
+    ],
+    "stepsTa": [
+      "{protein} ஐ மரினேட் செய்து 30 நிமிடம் வைக்கவும்.",
+      "நெய், எண்ணெய், முழு மசாலா, வெங்காயம், தக்காளியுடன் மசாலா அடிப்பை உருவாக்கவும்.",
+      "மரினேட் செய்த {protein} சேர்த்து எண்ணெய் பிரியும் வரை சமைக்கவும்.",
+      "ஊற வைத்த அரிசி மற்றும் அளவிட்ட சூடான தண்ணீரை சேர்க்கவும்.",
+      "ஹாண்டியை மூடி குறைந்த தீயில் 25 முதல் 30 நிமிடம் சமைக்கவும்.",
+      "10 நிமிடம் ஓய்வில் வைத்து, ஓரத்திலிருந்து நடுவுக்கு மெதுவாக கிளறவும்."
+    ],
+    "chefTips": [
+      "Use heavy-bottom handi for even heat.",
+      "Place tawa below handi to avoid hot spots.",
+      "A spoon of lemon juice brightens flavor."
+    ],
+    "stepTips": [
+      "Keep the marinade long enough for mutton; chicken needs less time to absorb the spices.",
+      "Cook the base masala until glossy so the handi has a deep body.",
+      "Wait for the oil to separate from the meat before adding rice.",
+      "Add hot water measured to the vessel so the rice cooks evenly.",
+      "Low flame is essential; high heat will dry the handi biriyani.",
+      "Break the seal only after resting so the steam stays trapped in the handi."
+    ],
+    "stepTipsTa": [
+      "மட்டனுக்கு நீண்ட மரினேட் நேரமும், சிக்கனுக்கு குறைந்த ஊறுகாய் நேரமும் போதும்.",
+      "ஹாண்டிக்கு ஆழமான உடல் கிடைக்க, மசாலாவை பளபளப்பாகும் வரை சமைக்கவும்.",
+      "அரிசி சேர்ப்பதற்கு முன் இறைச்சியிலிருந்து எண்ணெய் பிரிவதை காத்திருக்கவும்.",
+      "அரிசி சமமாக வேகவதற்குக் கணக்கிட்டு சூடான தண்ணீரைச் சேர்க்கவும்.",
+      "குறைந்த தீ அவசியம்; அதிக சூடு ஹாண்டி பிரியாணியை உலர்த்திவிடும்.",
+      "ஓய்வுக்குப் பிறகே முத்திரையை உடைத்து, நீராவி உள்ளே தங்கியிருக்க விடவும்."
+    ],
+    "chefTipsTa": [
+      "சீரான சூட்டிற்கு கனமான அடிப்பகுதி ஹாண்டி பயன்படுத்தவும்.",
+      "அதிக சூடு வராதபடி ஹாண்டிக்குக் கீழே துவா வைக்கவும்.",
+      "எலுமிச்சை சாறு ஒரு ஸ்பூன் சுவையை பிரகாசமாக்கும்."
+    ]
+  }
+}
