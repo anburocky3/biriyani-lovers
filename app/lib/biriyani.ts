@@ -1,7 +1,7 @@
 import recipeData from "@/app/data/recipes.json";
 
 export type VesselKey = "cooker" | "dabara" | "open_pot" | "handi";
-export type ProteinType = "veg" | "chicken" | "mutton";
+export type ProteinType = "veg" | "chicken" | "mutton" | "beef";
 export type RiceUnit = "glass" | "ml";
 
 export type VesselRecipe = {
@@ -125,17 +125,21 @@ function getProteinLabel(
   if (language === "ta") {
     if (proteinType === "veg") return "காய்கறி + பன்னீர்";
     if (proteinType === "chicken") return "சிக்கன்";
+    if (proteinType === "beef") return "பீஃப்";
     return "மட்டன்";
   }
 
   if (proteinType === "veg") return "vegetable mix + paneer";
   if (proteinType === "chicken") return "chicken";
+  if (proteinType === "beef") return "beef";
   return "mutton";
 }
 
 function getWhistleCount(proteinType: ProteinType): number | null {
   if (proteinType === "veg") return 1;
   if (proteinType === "chicken") return 2;
+  if (proteinType === "mutton") return 4;
+  if (proteinType === "beef") return 4;
   return 4;
 }
 
@@ -143,11 +147,18 @@ function getWhistleText(
   vessel: VesselKey,
   proteinType: ProteinType,
   language: LanguageCode,
+  cookerMode: "whistle" | "no-whistle" = "whistle",
 ): string {
   if (vessel !== "cooker") {
     return language === "ta"
       ? "இந்த பாத்திரத்திற்கு விசில் தேவையில்லை; நேரமும் டமும் பயன்படுத்தவும்."
       : "This vessel does not use whistles; follow the timing and dum steps instead.";
+  }
+
+  if (cookerMode === "no-whistle") {
+    return language === "ta"
+      ? "குக்கரில் விசில் இல்லை; குறைந்த தீயில் நேரம் மற்றும் ஓய்வு வழிகாட்டல்களை பின்பற்றவும்."
+      : "Cooker without whistles selected — use low heat timings and rest (dum) as described.";
   }
 
   const whistles = getWhistleCount(proteinType) ?? 0;
@@ -162,6 +173,8 @@ function getWhistleText(
 function getProteinQuantity(proteinType: ProteinType, factor: number): number {
   if (proteinType === "veg") return Math.round(220 * factor);
   if (proteinType === "chicken") return Math.round(250 * factor);
+  if (proteinType === "mutton") return Math.round(300 * factor);
+  if (proteinType === "beef") return Math.round(320 * factor);
   return Math.round(300 * factor);
 }
 
@@ -173,12 +186,16 @@ function getProteinNote(
     if (proteinType === "veg") return "கேரட், பீன்ஸ், பட்டாணி, பன்னீர்";
     if (proteinType === "chicken")
       return "எலும்புடன் அல்லது எலும்பில்லாமல் துண்டுகள்";
-    return "மெல்லிய மற்றும் சமமான மாட்டு/ஆடு துண்டுகள்";
+    if (proteinType === "mutton")
+      return "மெல்லிய மற்றும் சமமான மாட்டு/ஆடு துண்டுகள்";
+    if (proteinType === "beef") return "மெல்லிய மற்றும் சமமான பீஃப் துண்டுகள்";
   }
 
   if (proteinType === "veg") return "Carrot, beans, peas, paneer";
   if (proteinType === "chicken") return "Bone-in or boneless pieces";
-  return "Evenly cut mutton pieces";
+  if (proteinType === "mutton") return "Evenly cut mutton pieces";
+  if (proteinType === "beef") return "Evenly cut beef pieces";
+  return "Evenly cut meat pieces";
 }
 
 function getProteinTip(
@@ -190,13 +207,20 @@ function getProteinTip(
       return "சைவத்திற்கு குறைந்த ஊறுகாய் நேரம் போதும்.";
     if (proteinType === "chicken")
       return "சிக்கனுக்கு 20-30 நிமிட ஊறுகாய் போதும்.";
-    return "மட்டனுக்கு குறைந்தது 45 நிமிடம் அல்லது அதற்கு மேல் மரினேட் செய்யவும்.";
+    if (proteinType === "mutton")
+      return "மட்டனுக்கு குறைந்தது 45 நிமிடம் அல்லது அதற்கு மேல் மரினேட் செய்யவும்.";
+    if (proteinType === "beef")
+      return "பீஃப் குறைந்தது 60 நிமிடம் அல்லது மேலும் மரினேட் செய்யவும்.";
   }
 
   if (proteinType === "veg") return "Vegetables need a shorter marinade time.";
   if (proteinType === "chicken")
     return "Chicken usually needs 20-30 minutes of marination.";
-  return "Mutton needs at least 45 minutes of marination.";
+  if (proteinType === "mutton")
+    return "Mutton needs at least 45 minutes of marination.";
+  if (proteinType === "beef")
+    return "Beef benefits from longer marination (60+ minutes).";
+  return "Meat needs proper marination time based on type.";
 }
 
 function formatWholeSpiceCount(amount: number): string {
@@ -212,14 +236,16 @@ function getScaledKitchenMeasure(factor: number): {
   mintCount: number;
   corianderCount: number;
 } {
+  // Use diminishing scale (sqrt) for ingredients that don't scale linearly with rice quantity
+  const spiceScale = Math.sqrt(factor);
   return {
-    oilTbsp: round(2.5 * factor, 2),
-    gheeTbsp: round(1.5 * factor, 2),
-    onionCount: Math.max(1, Math.round(1.2 * factor)),
-    tomatoCount: Math.max(1, Math.round(1 * factor)),
-    curdMl: Math.round(70 * factor),
-    mintCount: Math.max(1, Math.round(2 * factor)),
-    corianderCount: Math.max(1, Math.round(2 * factor)),
+    oilTbsp: round(2.5 * spiceScale, 2),
+    gheeTbsp: round(1.5 * spiceScale, 2),
+    onionCount: Math.max(1, Math.round(1.2 * spiceScale)),
+    tomatoCount: Math.max(1, Math.round(1 * spiceScale)),
+    curdMl: Math.round(70 * spiceScale),
+    mintCount: Math.max(1, Math.round(2 * spiceScale)),
+    corianderCount: Math.max(1, Math.round(2 * spiceScale)),
   };
 }
 
@@ -230,14 +256,16 @@ function getBaseHeatGuide(
   details: string;
   spices: string[];
 } {
-  const oilTbsp = round(2.5 * factor, 2);
-  const gheeTbsp = round(1.5 * factor, 2);
-  const bayLeafCount = formatWholeSpiceCount(1 * factor);
-  const cinnamonCount = formatWholeSpiceCount(1 * factor);
-  const clovesCount = formatWholeSpiceCount(4 * factor);
-  const cardamomCount = formatWholeSpiceCount(3 * factor);
-  const starAniseCount = formatWholeSpiceCount(1 * factor);
-  const fennelTsp = round(0.75 * factor, 2);
+  const spiceScale = Math.sqrt(factor);
+  const oilTbsp = round(2.5 * spiceScale, 2);
+  const gheeTbsp = round(1.5 * spiceScale, 2);
+  const bayLeafCount = formatWholeSpiceCount(1 * spiceScale);
+  const cinnamonCount = formatWholeSpiceCount(1 * spiceScale);
+  const clovesCount = formatWholeSpiceCount(4 * spiceScale);
+  const cardamomCount = formatWholeSpiceCount(3 * spiceScale);
+  const starAniseCount = formatWholeSpiceCount(1 * spiceScale);
+  // Fennel scales even less aggressively to avoid overpowering flavor
+  const fennelTsp = round(Math.max(0.5, 0.75 * spiceScale * 0.7), 2);
 
   if (language === "ta") {
     return {
@@ -276,6 +304,7 @@ function applyProteinReplacement(step: string, proteinLabel: string): string {
 
 function getMarinationTimeLabel(proteinType: ProteinType): string {
   if (proteinType === "mutton") return "T-45 min";
+  if (proteinType === "beef") return "T-45 min";
   if (proteinType === "chicken") return "T-20 min";
   return "T-15 min";
 }
@@ -730,6 +759,7 @@ function resolveStepTips(
   recipe: VesselRecipe,
   language: LanguageCode,
   proteinType: ProteinType,
+  cookerMode: "whistle" | "no-whistle" = "whistle",
 ): string[] {
   const baseTips =
     language === "ta"
@@ -740,7 +770,12 @@ function resolveStepTips(
     const proteinTip = getProteinTip(proteinType, language);
 
     return baseTips.map((tip, index) => {
-      const whistleText = getWhistleText("cooker", proteinType, language);
+      const whistleText = getWhistleText(
+        "cooker",
+        proteinType,
+        language,
+        cookerMode,
+      );
       return tip
         .replaceAll("{protein}", getProteinLabel(proteinType, language))
         .replaceAll("{whistle}", whistleText)
@@ -759,6 +794,7 @@ export function generateRecipePlan(args: {
   people?: number;
   proteinType: ProteinType;
   language?: LanguageCode;
+  cookerMode?: "whistle" | "no-whistle";
 }): RecipePlan {
   const language = args.language ?? "en";
   const recipe = getRecipeCopy(args.vessel, language);
@@ -766,10 +802,20 @@ export function generateRecipePlan(args: {
   const people = resolvePeople(riceMl, args.people);
   const factor = riceMl / GLASS_TO_ML;
   const proteinLabel = getProteinLabel(args.proteinType, language);
-  const whistleText = getWhistleText(args.vessel, args.proteinType, language);
+  const whistleText = getWhistleText(
+    args.vessel,
+    args.proteinType,
+    language,
+    args.cookerMode ?? "whistle",
+  );
   const proteinQuantity = getProteinQuantity(args.proteinType, factor);
   const proteinNote = getProteinNote(args.proteinType, language);
-  const stepTips = resolveStepTips(recipe, language, args.proteinType);
+  const stepTips = resolveStepTips(
+    recipe,
+    language,
+    args.proteinType,
+    args.cookerMode ?? "whistle",
+  );
   const prerequisites = buildPrerequisites(
     args.proteinType,
     language,
@@ -791,8 +837,8 @@ export function generateRecipePlan(args: {
         ? "அதிக கொதிநீர் பயன்படுத்தி, 75% வரை வேகவைத்து வடிகட்டவும்."
         : "Use excess boiling water (about 6x rice volume), cook to 75% and drain."
       : language === "ta"
-        ? `${formatMl(riceMl * recipe.waterRatio)} (${round(recipe.waterRatio, 2)} மடங்கு அரிசி)`
-        : `${formatMl(riceMl * recipe.waterRatio)} (${round(recipe.waterRatio, 2)}x rice)`;
+        ? `${formatMl(riceMl * recipe.waterRatio)} (1 : ${round(recipe.waterRatio, 2)} விகிதம் — அரிசி : நீர்)`
+        : `${formatMl(riceMl * recipe.waterRatio)} (1 : ${round(recipe.waterRatio, 2)} ratio — rice : water)`;
 
   const ingredients: IngredientRow[] = [
     {

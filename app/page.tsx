@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Beaker,
   BookHeart,
@@ -50,8 +50,14 @@ export default function Home() {
   const [riceUnit, setRiceUnit] = useState<RiceUnit>("glass");
   const [people, setPeople] = useState("");
   const [proteinType, setProteinType] = useState<ProteinType>("chicken");
+  const [cookerMode, setCookerMode] = useState<"whistle" | "no-whistle">(
+    "whistle",
+  );
   const [plan, setPlan] = useState<RecipePlan | null>(null);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [highlightSteps, setHighlightSteps] = useState(false);
+  const outputRef = useRef<HTMLDivElement | null>(null);
+  const stepsRef = useRef<HTMLDivElement | null>(null);
   const [favorites, setFavorites] = useState<FavoriteRecipe[]>([]);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -82,10 +88,21 @@ export default function Home() {
       people: Number.isNaN(parsedPeople) ? undefined : parsedPeople,
       proteinType,
       language,
+      cookerMode,
     });
 
     setPlan(nextPlan);
     setCompletedSteps([]);
+    // Scroll to the cooking steps and flash highlight
+    setTimeout(() => {
+      // prefer the steps block; fall back to the whole output section
+      const target = stepsRef.current ?? outputRef.current;
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        setHighlightSteps(true);
+        setTimeout(() => setHighlightSteps(false), 1200);
+      }
+    }, 50);
   };
 
   const toggleStep = (index: number) => {
@@ -153,6 +170,15 @@ export default function Home() {
       activeClass:
         "border-green-400 bg-green-100 text-green-700 dark:border-green-600 dark:bg-green-950/50 dark:text-green-200",
       icon: <Leaf className="h-4 w-4" />,
+    },
+    {
+      key: "beef" as const,
+      label: isTamil ? "பீஃப்" : "Beef",
+      description: isTamil ? "4 விசில் பரிந்துரை" : "4 whistles recommended",
+      dotClass: "bg-amber-700",
+      activeClass:
+        "border-amber-400 bg-amber-100 text-amber-700 dark:border-amber-500 dark:bg-amber-950/60 dark:text-amber-200",
+      icon: <ChefHat className="h-4 w-4" />,
     },
     {
       key: "chicken" as const,
@@ -229,6 +255,7 @@ export default function Home() {
         </section>
 
         <section
+          ref={outputRef}
           className={`animate-enter rounded-3xl border p-5 shadow-sm transition-all duration-300 ${cardTheme}`}
         >
           <h2 className="mb-4 text-lg font-semibold">
@@ -352,7 +379,7 @@ export default function Home() {
                   ? "சிக்கன் அல்லது மட்டன் தேர்வின் படி விசில் மற்றும் சமைக்கும் நேரம் மாறும்."
                   : "Choose chicken or mutton to adjust whistles and cooking time."}
               </span>
-              <div className="grid gap-2 sm:grid-cols-3">
+              <div className="grid gap-2 sm:grid-cols-4">
                 {proteinOptions.map((option) => {
                   const selected = proteinType === option.key;
 
@@ -383,17 +410,39 @@ export default function Home() {
                   );
                 })}
               </div>
+
+              <div className="mt-3">
+                <label className="flex items-center gap-3">
+                  <span className="text-sm font-medium">
+                    {isTamil ? "குக்கர் முறை" : "Cooker Mode"}
+                  </span>
+                  <select
+                    value={cookerMode}
+                    onChange={(e) =>
+                      setCookerMode(e.target.value as "whistle" | "no-whistle")
+                    }
+                    className="ml-2 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-orange-400 dark:border-slate-700 dark:bg-slate-800"
+                  >
+                    <option value="whistle">Whistle (use cooker)</option>
+                    <option value="no-whistle">
+                      No whistle (low-heat dum)
+                    </option>
+                  </select>
+                </label>
+              </div>
             </label>
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-5 flex flex-col justify-center items-center gap-3">
             <button
               type="button"
               onClick={onGenerate}
-              className="inline-flex items-center gap-2 rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:bg-orange-600"
+              className="flex  items-center justify-center rounded-2xl bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:scale-[1.02] hover:bg-orange-600 w-full text-center"
             >
               <Sparkles className="h-4 w-4 text-yellow-100" />
-              {isTamil ? "பிரியாணி உருவாக்கவும்" : "Generate Recipe"}
+              <span className="ml-4">
+                {isTamil ? "பிரியாணி உருவாக்கவும்" : "Generate Recipe"}
+              </span>
             </button>
 
             <button
@@ -422,7 +471,10 @@ export default function Home() {
 
           {plan ? (
             <div className="grid gap-4 lg:grid-cols-2">
-              <article className="rounded-2xl border border-orange-200 bg-linear-to-br from-orange-50 to-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:col-span-2">
+              <article
+                className="rounded-2xl border border-orange-200 bg-linear-to-br from-orange-50 to-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:col-span-2"
+                ref={stepsRef}
+              >
                 <h3 className="mb-3 inline-flex items-center gap-2 text-base font-semibold">
                   <CircleCheckBig className="h-4 w-4 text-orange-600 dark:text-orange-300" />
                   {isTamil ? "🔖 முன் தேவை" : "🔖 Prerequisite Card"}
@@ -516,7 +568,13 @@ export default function Home() {
                 </div>
               </article>
 
-              <article className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+              <article
+                className={`rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900 ${
+                  highlightSteps
+                    ? "ring-4 ring-orange-300/30 animate-pulse"
+                    : ""
+                }`}
+              >
                 <h3 className="mb-3 inline-flex items-center gap-2 text-base font-semibold">
                   <Wheat className="h-4 w-4 text-orange-600 dark:text-orange-300" />
                   {isTamil ? "🍚 பொருட்கள்" : "🍚 Ingredients"}
@@ -673,7 +731,9 @@ export default function Home() {
                       ? "Veg"
                       : item.proteinType === "chicken"
                         ? "Chicken"
-                        : "Mutton"}{" "}
+                        : item.proteinType === "mutton"
+                          ? "Mutton"
+                          : "Beef"}{" "}
                     • {item.people} people
                   </p>
                   <p className="text-gray-600 dark:text-slate-300">
